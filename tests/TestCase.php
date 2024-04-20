@@ -5,6 +5,7 @@ namespace Dgo\Cornerstone\Tests;
 use BladeUIKit\BladeUIKitServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Intervention\Image\Laravel\ServiceProvider as ImageServiceProvider;
 use Orchestra\Testbench\TestCase as Testbench;
 
 abstract class TestCase extends Testbench
@@ -33,6 +34,7 @@ abstract class TestCase extends Testbench
         return [
             'Dgo\Cornerstone\CornerstoneServiceProvider',
             BladeUIKitServiceProvider::class,
-            ];
+            ImageServiceProvider::class
+        ];
     }
 }

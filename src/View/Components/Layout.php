@@ -12,9 +12,10 @@ class Layout extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public ?string $title = null
-    )
-    {}
+        public ?string $title = null,
+        public ?string $trackingId = null
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

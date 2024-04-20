@@ -2,9 +2,8 @@
 
 it('updates package.json correctly', function () {
     // Step 1: Create a Temporary Directory
-    $tempDir = sys_get_temp_dir() . '/tall-frontend';
-    if(!File::exists($tempDir))
-    {
+    $tempDir = sys_get_temp_dir().'/tall-frontend';
+    if (! File::exists($tempDir)) {
         File::makeDirectory($tempDir);
     }
 
@@ -20,9 +19,9 @@ it('updates package.json correctly', function () {
     $command = new \Dgo\Cornerstone\Console\Commands\TallStackInstall();
     $command->updateNodePackages(function ($packages) {
         return [
-                '@tailwindcss/aspect-ratio' => '^0.4.2',
-                // ... other packages
-            ] + $packages;
+            '@tailwindcss/aspect-ratio' => '^0.4.2',
+            // ... other packages
+        ] + $packages;
     }, true, $tempDir);  // Assuming you modify your method to accept a directory path
 
     // Step 4: Assertions

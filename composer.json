@@ -23,7 +23,8 @@
         "blade-ui-kit/blade-icons": "*",
         "blade-ui-kit/blade-heroicons": "*",
         "owenvoke/blade-fontawesome": "*",
-        "spatie/laravel-google-fonts": "*"
+        "spatie/laravel-google-fonts": "*",
+        "intervention/image-laravel": "^1.2"
     },
     "require-dev": {
         "laravel/pint": "^1.13.2",
@@ -49,7 +50,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "@php artisan readme:update"
+
         ]
     },
     "extra": {
@@ -58,6 +59,7 @@
                 "Dgo\\Cornerstone\\CornerstoneServiceProvider"
             ],
             "aliases": {
+                "ImageHelp": "Dgo\\Cornerstone\\Facades\\ImageHelp"
             }
         }
     },

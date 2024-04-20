@@ -5,7 +5,7 @@
 >
     <x-slot:head>
 
-        <x-dgo::utilities.google-tag />
+        <x-dgo::utilities.google-tag :$trackingId />
         <x-dgo::utilities.favicons/>
 
     </x-slot:head>

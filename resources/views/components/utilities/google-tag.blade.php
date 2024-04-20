@@ -1,11 +1,12 @@
-@configIsSet('cornerstone.google_analytics.tracking_id')
+@props(['trackingId' => config('cornerstone.google_analytics.tracking_id')])
+@isset($trackingId)
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{config('cornerstone.google_analytics.tracking_id')}}"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{$trackingId}}"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', '{{config('cornerstone.google_analytics.tracking_id')}}');
+    gtag('config', '{{$trackingId}}');
 </script>
-@endconfigIsSet
+@endisset

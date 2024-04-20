@@ -4,8 +4,11 @@ namespace Dgo\Cornerstone;
 
 use Dgo\Cornerstone\Console\Commands\ReadMeUpdate;
 use Dgo\Cornerstone\Console\Commands\TallStackInstall;
+use Dgo\Cornerstone\Console\Commands\GenerateFaviconSizesCommand;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\Laravel\Facades\Image;
+use Dgo\Cornerstone\ImageHelp as ImageHelpClass;
 use Laravel\Folio\Folio;
 
 class CornerstoneServiceProvider extends ServiceProvider
@@ -36,6 +39,10 @@ class CornerstoneServiceProvider extends ServiceProvider
             return config($config) !== null;
         });
 
+        if (!class_exists('ImageHelp')) {
+            class_alias(\Dgo\Cornerstone\Facades\ImageHelp::class, 'ImageHelp');
+        }
+
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -47,7 +54,9 @@ class CornerstoneServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('image-help', function () {
+            return new ImageHelpClass();
+        });
     }
 
     /**
@@ -115,6 +124,7 @@ class CornerstoneServiceProvider extends ServiceProvider
         $this->commands([
             ReadmeUpdate::class,
             TallStackInstall::class,
+            GenerateFaviconSizesCommand::class,
         ]);
     }
 }

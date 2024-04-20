@@ -27,19 +27,19 @@ class TallStackInstall extends Command
     {
         $this->updateNodePackages(function ($packages) {
             return [
-                    '@tailwindcss/aspect-ratio' => '^0.4.2',
-                    '@tailwindcss/forms' => '^0.5.2',
-                    'autoprefixer' => '^10.4.2',
-                    'axios' => '^1.1.2',
-                    'cropperjs' => '^1.6.1',
-                    'flowbite' => '^1.8.1',
-                    'flowbite-typography' => '^1.0.3',
-                    'laravel-vite-plugin' => '^0.8.0',
-                    'postcss' => '^8.4.6',
-                    'tailwindcss' => '^3.1.0',
-                    'tailwindcss-debug-screens' => '^2.2.1',
-                    'vite' => '^4.0.0',
-                ] + $packages;
+                '@tailwindcss/aspect-ratio' => '^0.4.2',
+                '@tailwindcss/forms' => '^0.5.2',
+                'autoprefixer' => '^10.4.2',
+                'axios' => '^1.1.2',
+                'cropperjs' => '^1.6.1',
+                'flowbite' => '^1.8.1',
+                'flowbite-typography' => '^1.0.3',
+                'laravel-vite-plugin' => '^0.8.0',
+                'postcss' => '^8.4.6',
+                'tailwindcss' => '^3.1.0',
+                'tailwindcss-debug-screens' => '^2.2.1',
+                'vite' => '^4.0.0',
+            ] + $packages;
         });
     }
 
