@@ -4,11 +4,55 @@ This is where your description should go. Take a look at [contributing.md](contr
 
 ## Installation
 
-Via Composer
+Install a new Laravel project
 
 ``` bash
-$ composer require disciplego/cornerstone
+composer new laravel projectname
 ```
+Edit composer.json
+- app name and description
+- change "minimum-stability": "dev",
+- add Dgo repository
+
+```
+"repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.disciplego.com"
+        }
+    ],
+```
+Edit composer.json
+
+- 
+
+Install the package
+``` bash
+composer require disciplego/cornerstone
+```
+Publish the assets
+``` bash
+php artisan vendor:publish --force
+```
+Install the TALL stack
+``` bash    
+php artisan tall:install
+```
+
+- Copy .env.example options to .env
+- Create Database
+
+NPM Install & Run Build
+``` bash    
+npm install
+npm run build
+```
+Install the dev dependencies
+``` bash
+composer require --dev laravel/pint:^1.13.2 mockery/mockery:^1.6.11 nunomaduro/collision:^8.1.1 orchestra/testbench:^9.0.4 pestphp/pest:^2.34.7 pestphp/pest-plugin-arch:^2.3.3 pestphp/pest-plugin-laravel:^2.3.0 pestphp/pest-plugin-livewire:^v2.1.0 barryvdh/laravel-debugbar:^3.13 fakerphp/faker:^1.23
+```
+
+``` bash
 
 ## Usage
 

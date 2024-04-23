@@ -11,7 +11,6 @@ class GenerateFaviconSizesCommand extends Command
 
     protected $description = 'Generate favicon sizes from a given URL or default URL';
 
-
     public function handle()
     {
         $url = $this->argument('url') ?? 'https://dummyimage.com/512.png';
@@ -19,7 +18,7 @@ class GenerateFaviconSizesCommand extends Command
         // Call the generateFaviconSizes method
         ImageHelp::generateFaviconSizes($url);
 
-        if (!$url) {
+        if (! $url) {
             $url = 'default';
         }
         $this->info("Favicon sizes generated for URL: {$url}");

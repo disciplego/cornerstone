@@ -4,10 +4,8 @@ namespace Dgo\Cornerstone;
 
 use Intervention\Image\Laravel\Facades\Image;
 
-
 class ImageHelp
 {
-
     public static function getDummyImageUrl($width = '600', $height = '400', $backgroundColor = '000', $fontColor = 'fff', $format = 'png', $text = 'Image Text'): string
     {
         $text = urlencode($text);
@@ -15,7 +13,7 @@ class ImageHelp
         return "https://dummyimage.com/{$width}x{$height}/{$backgroundColor}/{$fontColor}.{$format}&text={$text}";
     }
 
-    public static function generateFaviconSizes(string $primaryFaviconUrl = null, string $savePath = null)
+    public static function generateFaviconSizes(?string $primaryFaviconUrl = null, ?string $savePath = null)
     {
         $savePath = $savePath ?? public_path();
 
@@ -40,7 +38,7 @@ class ImageHelp
         self::generateSiteManifest($savePath);
     }
 
-    public static function generateSiteManifest(string $savePath = null)
+    public static function generateSiteManifest(?string $savePath = null)
     {
         $savePath = $savePath ?? public_path();
         $manifest = [
@@ -50,17 +48,17 @@ class ImageHelp
                 [
                     'src' => '/android-chrome-192x192.png',
                     'sizes' => '192x192',
-                    'type' => 'image/png'
+                    'type' => 'image/png',
                 ],
                 [
                     'src' => '/android-chrome-512x512.png',
                     'sizes' => '512x512',
-                    'type' => 'image/png'
-                ]
+                    'type' => 'image/png',
+                ],
             ],
             'theme_color' => '#ffffff',
             'background_color' => '#ffffff',
-            'display' => 'standalone'
+            'display' => 'standalone',
         ];
 
         $manifestJson = json_encode($manifest, JSON_PRETTY_PRINT);

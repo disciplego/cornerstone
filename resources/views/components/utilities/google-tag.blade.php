@@ -1,4 +1,4 @@
-@props(['trackingId' => config('cornerstone.google_analytics.tracking_id')])
+@aware(['trackingId' => config('cornerstone.google_analytics.tracking_id')])
 @isset($trackingId)
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{$trackingId}}"></script>

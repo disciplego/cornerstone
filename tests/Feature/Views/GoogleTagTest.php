@@ -1,6 +1,7 @@
 <?php
 
 it('shows no tag script if trackingId not set', function () {
+    config(['cornerstone.google_analytics.tracking_id' => null]);
     $view = $this->blade('<x-dgo::utilities.google-tag />');
 
     expect($view)->assertDontSee('<!-- Google tag (gtag.js) -->', false);
@@ -27,7 +28,7 @@ it('can override trackingId', function () {
 
 it('can override trackingID using a layout variable', function () {
     config(['app.name' => 'Foo']);
-    $view = $this->blade('@php $title = "Foobar"; $trackingId = "Foo42" @endphp <x-dgo-layout :$title :$trackingId></x-dgo-layout>');
+    $view = $this->blade('@php $title = "Foobar"; $trackingId = "Foo42" @endphp <x-dgo::layouts.base :$title :$trackingId></x-dgo::layouts.base>');
 
     expect($view)->assertSee('<title>Foobar | Foo</title>', false)
         ->assertSee('=Foo42', false);

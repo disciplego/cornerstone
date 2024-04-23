@@ -1,6 +1,6 @@
 <?php
 
-use \Dgo\Cornerstone\Facades\ImageHelp;
+use Dgo\Cornerstone\Facades\ImageHelp;
 
 it('generates dummy favicon sizes and site webmanifest', function () {
     // Arrange
@@ -22,7 +22,6 @@ it('generates dummy favicon sizes and site webmanifest', function () {
 it('overwrites existing favicon sizes and site manifest', function () {
     // Arrange
     $tempDir = sys_get_temp_dir();
-
 
     // First generation
     ImageHelp::generateFaviconSizes(null, $tempDir);
