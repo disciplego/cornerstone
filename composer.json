@@ -27,7 +27,8 @@
         "intervention/image-laravel": "^1.2",
         "livewire/volt": "^1.6",
         "spatie/laravel-markdown": "^2.5",
-        "spatie/yaml-front-matter": "^2.0"
+        "spatie/yaml-front-matter": "^2.0",
+        "league/commonmark": "^2.4"
     },
     "require-dev": {
         "laravel/pint": "^1.13.2",

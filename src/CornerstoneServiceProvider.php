@@ -22,6 +22,7 @@ class CornerstoneServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dgo');
+        $this->loadViewsFrom(__DIR__ . '/../resources/markdown/pages', 'markdown');
         $this->loadViewComponentsAs('dgo', [
             View\Components\Layouts\Layout::class,
         ]);
@@ -87,6 +88,7 @@ class CornerstoneServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/cornerstone.php', 'cornerstone');
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-pages.php', 'dgo-pages');
         $this->mergeConfigFrom(__DIR__ . '/../config/google-fonts.php', 'google-fonts');
+        $this->mergeConfigFrom(__DIR__ . '/../config/blade-ui-kit.php', 'blade-ui-kit');
         $this->app->singleton('image-help', function () {
             return new ImageHelp;
         });
