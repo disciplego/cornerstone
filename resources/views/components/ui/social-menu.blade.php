@@ -4,7 +4,7 @@
             @if($item['is_activated'] === true)
                 <a data-popover-target="{{'target_' .$item['id'] .$item['slug']}}" data-popover-placement="bottom"
                    href="@isset($item['url']){{$item['url']}}@endisset"
-                   class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                   class="text-gray-500 hover:text-gray-900 dark:hover:text-white" wire:navigate>
                     @isset($item['icon'])
                         <x-icon name="{{$item['icon']}}" class="h-5"/>
                     @endisset

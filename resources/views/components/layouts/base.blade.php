@@ -15,7 +15,7 @@
         @endif
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        @livewireStyles
         <!-- Dark Mode Toggle -->
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -53,4 +53,5 @@
     @endisset
 
     @vite(['resources/js/scripts.js'])
+    @livewireScripts
 </x-html>

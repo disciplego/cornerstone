@@ -29,7 +29,8 @@
         "spatie/laravel-markdown": "^2.5",
         "spatie/yaml-front-matter": "^2.0",
         "league/commonmark": "^2.4",
-        "calebporzio/sushi": "^2.5"
+        "calebporzio/sushi": "^2.5",
+        "spatie/laravel-sluggable": "^3.6"
     },
     "require-dev": {
         "laravel/pint": "^1.13.2",

@@ -5,7 +5,7 @@
 
         <li>
             <a href="{{ isset($item['route']) ? route($item['route']) : $item['url'] }}"
-               class="mr-4 hover:underline md:mr-6 ">@isset($item['title']){{$item['title']}}@endisset</a>
+               class="mr-4 hover:underline md:mr-6 " wire:navigate>@isset($item['title']){{$item['title']}}@endisset</a>
         </li>
     @endforeach
 

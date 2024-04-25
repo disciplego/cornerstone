@@ -5,7 +5,9 @@ namespace Dgo\Cornerstone\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static getDummyImageUrl($width = 640, $height = 480)
+ * @method static string getDummyImageUrl(string $width = '600', string $height = '400', string $backgroundColor = '000', string $fontColor = 'fff', string $format = 'png', string $text = 'Image Text')
+ * @method static void generateFaviconSizes(string $primaryFaviconUrl = null, string $savePath = null)
+ * @method static void generateSiteManifest(string $savePath = null)
  */
 class ImageHelp extends Facade
 {

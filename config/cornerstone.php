@@ -24,7 +24,7 @@ return [
             'url' => '/blog',
             'icon' => 'fas-file-lines',
             'target' => null,
-            'help_text' => 'Blog Calendar',
+            'help_text' => 'Blog Posts',
             'is_activated' => true,
         ],
         [
