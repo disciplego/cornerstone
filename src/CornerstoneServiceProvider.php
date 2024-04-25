@@ -5,7 +5,7 @@ namespace Dgo\Cornerstone;
 use Dgo\Cornerstone\Console\Commands\GenerateFaviconSizesCommand;
 use Dgo\Cornerstone\Console\Commands\ReadMeUpdate;
 use Dgo\Cornerstone\Console\Commands\TallStackInstall;
-use Dgo\Cornerstone\ImageHelp as ImageHelpClass;
+use Dgo\Cornerstone\ImageHelp;
 use Dgo\Cornerstone\MarkdownHelp;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
@@ -40,6 +40,7 @@ class CornerstoneServiceProvider extends ServiceProvider
         Volt::mount([
             resource_path('views/pages'),
             resource_path('views/livewire'),
+            resource_path('pages'),
         ]);
 
         $pagesPath = resource_path('views/pages');
@@ -89,6 +90,7 @@ class CornerstoneServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-pages.php', 'dgo-pages');
         $this->mergeConfigFrom(__DIR__ . '/../config/google-fonts.php', 'google-fonts');
         $this->mergeConfigFrom(__DIR__ . '/../config/blade-ui-kit.php', 'blade-ui-kit');
+
         $this->app->singleton('image-help', function () {
             return new ImageHelp;
         });

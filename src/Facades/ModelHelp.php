@@ -4,16 +4,15 @@ namespace Dgo\Cornerstone\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @method static getDummyImageUrl($width = 640, $height = 480)
- */
-class ImageHelp extends Facade
+class ModelHelp extends Facade
 {
     /**
      * Get the registered name of the component.
+     *
+     * @return string
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'image-help';
+        return 'model-help';
     }
 }
