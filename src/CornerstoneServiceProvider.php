@@ -71,6 +71,10 @@ class CornerstoneServiceProvider extends ServiceProvider
             class_alias(\Dgo\Cornerstone\Facades\ModelHelp::class, 'ModelHelp');
         }
 
+        if (!class_exists('SushiHelp')) {
+            class_alias(\Dgo\Cornerstone\Facades\SushiHelp::class, 'SushiHelp');
+        }
+
         Blade::directive('titleTextRender', function ($markdown) {
             return "<?php echo MarkdownHelp::convertTitle($markdown); ?>";
         });
@@ -98,7 +102,11 @@ class CornerstoneServiceProvider extends ServiceProvider
             return new MarkdownHelp;
         });
         $this->app->singleton('model-help', function ($app) {
-            return new \Dgo\Cornerstone\ModelHelp($app->make(Filesystem::class));
+            return new ModelHelp($app->make(Filesystem::class));
+        });
+
+        $this->app->singleton('sushi-help', function ($app) {
+            return new SushiHelp;
         });
     }
 
