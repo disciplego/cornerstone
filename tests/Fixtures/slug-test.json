@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Slug Test",
+    "slug": "slug-test"
+  },
+  {
+    "title": "Slug Test Duplicate",
+    "slug": "slug-test"
+  },
+  {
+    "title": "Slug Test Empty Slug",
+    "slug": null
+  }
+]

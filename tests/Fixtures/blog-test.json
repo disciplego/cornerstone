@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1001,
+    "title": "My First Test Blog Post",
+    "slug": "my-first-test-blog-post",
+    "lead": "This is the lead for my first test blog post",
+    "featured_image": "https://via.placeholder.com/1920x1080.png",
+    "body": "<p>This is the content for my first test blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elite</p>",
+    "date": "2021-01-01"
+  },
+  {
+    "id": 1002,
+    "title": "My Second Test Blog Post",
+    "slug": "my-second-test-blog-post",
+    "lead": "This is the lead for my second test blog post",
+    "featured_image": "https://via.placeholder.com/1920x1080.png",
+    "body": "<p>This is the content for my second test blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elite</p>",
+    "date": "2021-01-02"
+  },
+  {
+    "id": 1003,
+    "title": "My Third Test Blog Post",
+    "slug": "my-third-test-blog-post",
+    "lead": "This is the lead for my third test blog post",
+    "featured_image": "https://via.placeholder.com/1920x1080.png",
+    "body": "<p>This is the content for my third test blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elite</p>",
+    "date": "2021-01-03"
+  }
+]
