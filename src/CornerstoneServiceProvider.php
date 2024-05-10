@@ -40,16 +40,16 @@ class CornerstoneServiceProvider extends ServiceProvider
             'hideMainMenu' => false,
         ]);
 
-        Volt::mount([
-            resource_path('views/pages'),
-            resource_path('views/livewire'),
-            resource_path('pages'),
-        ]);
+//        Volt::mount([
+//            resource_path('views/pages'),
+//            resource_path('views/livewire'),
+//            resource_path('pages'),
+//        ]);
 
         $pagesPath = resource_path('pages');
 
         // Check if the 'pages' directory exists
-        if (dir($pagesPath)) {
+        if (is_dir($pagesPath)) {
             // Set the path if the directory exists
             Folio::path($pagesPath);
         }
