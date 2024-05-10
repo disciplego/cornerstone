@@ -11,7 +11,7 @@ it('registers the CornerstoneServiceProvider', function () {
 it('merges its configuration properly', function () {
     $this->app->register(CornerstoneServiceProvider::class);
     $config = config('cornerstone');
-    expect($config)->toBeArray();
-    expect($config)->toHaveKey('someKey');
-    expect($config['someKey'])->toEqual('expectedValue');
+    expect($config)->toBeArray()
+        ->and($config)->toHaveKey('dark_theme_toggle')
+        ->and($config['dark_theme_toggle'])->toEqual(true);
 });

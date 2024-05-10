@@ -7,6 +7,8 @@ use Dgo\Cornerstone\Console\Commands\ReadMeUpdate;
 use Dgo\Cornerstone\Console\Commands\TallStackInstall;
 use Dgo\Cornerstone\ImageHelp;
 use Dgo\Cornerstone\MarkdownHelp;
+use Dgo\Cornerstone\View\Components\Layouts\App;
+use Dgo\Cornerstone\View\Components\Layouts\Base;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -24,7 +26,8 @@ class CornerstoneServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dgo');
         $this->loadViewsFrom(__DIR__ . '/../resources/markdown/pages', 'markdown');
         $this->loadViewComponentsAs('dgo', [
-            View\Components\Layouts\Layout::class,
+            Base::class,
+            App::class,
         ]);
 
         // Set default view data
@@ -43,10 +46,10 @@ class CornerstoneServiceProvider extends ServiceProvider
             resource_path('pages'),
         ]);
 
-        $pagesPath = resource_path('views/pages');
+        $pagesPath = resource_path('pages');
 
         // Check if the 'pages' directory exists
-        if (file_exists($pagesPath)) {
+        if (dir($pagesPath)) {
             // Set the path if the directory exists
             Folio::path($pagesPath);
         }
