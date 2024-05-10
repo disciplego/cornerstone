@@ -2,13 +2,33 @@
 
 use Dgo\Cornerstone\Traits\SushiChef;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
+use Sushi\Sushi;
 
 class SushiTest extends Model {
-    use SushiChef;
+    use Sushi, SushiChef;
+
+    protected function sushiShouldCache()
+    {
+        return $this->sushiShouldCacheChef();
+    }
+
+    public function getRows()
+    {
+        return $this->getRowsChef();
+    }
+
+    protected function afterMigrate(Blueprint $table): void
+    {
+        $this->afterMigrateChef($table);
+    }
+
 };
 
 beforeEach(function () {
+    config(['sushi-chef.should_cache' => false]);
     $this->model = new SushiTest();
+
 });
 
 
@@ -29,17 +49,39 @@ it('can change the route key name', function () {
 });
 
 // Should Cache
-it('returns correct values for shouldCache', function () {
-    $this->model->setShouldCache(true);
-    expect($this->model->getShouldCache())->toBeTrue();
-    $this->model->setShouldCache(false);
-    expect($this->model->getShouldCache())->not()->toBeTrue();
+it('returns correct values for shouldCache', function ($configValue, $setValue, $expectedResult) {
+    config(['sushi-chef.should_cache' => $configValue]);
+    $this->model->setShouldCache($setValue);
+    expect($this->model->getShouldCache())->toBe($expectedResult);
+})->with([
+    [true, null, true],
+    [false, null, false],
+    [true, true, true],
+    [true, false, false],
+]);
+
+// Json Data
+it('returns correct data from JSON file', function () {
+
+    $this->model->setFilePath('tests/Fixtures/blog-test.json');
+
+    expect($this->model->getRowsChef())->toBeArray()->not()->toBeEmpty();
 });
 
-// Json File Path
-it('returns correct data from JSON file', function () {
-    $this->model->setFilePath('tests/Fixtures/blog-test.json');
-    expect($this->model->getJsonData())->toBeArray()->not()->toBeEmpty();
+it('returns empty array if JSON file does not exist', function () {
+    $this->model->setFilePath('tests/Fixtures/non-existent.json');
+    expect($this->model->getRowsChef())->toBeArray()->toBeEmpty();
+});
+
+it('returns empty array if no file path is set', function () {
+    expect($this->model->getRowsChef())->toBeArray()->toBeEmpty();
+});
+
+it('can override row data', function () {
+    $this->model->setRowData([['title' => 'Test', 'slug' => 'test']]);
+
+    expect($this->model->getRowsChef())->toBeArray()->toHaveCount(1)
+        ->and($this->model->getRowsChef())->toContain(['title' => 'Test', 'slug' => 'test']);
 });
 
 // Data Helpers

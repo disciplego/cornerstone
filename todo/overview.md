@@ -2,7 +2,16 @@
 
 ### Dgo Setup
 - [x] Install Laravel
+````
+laravel new testdomain
+````
+- [ ] herd secure testdomain
 - [ ] git init
+- [ ] create github repo
+- [ ] add github remote
+````
+git remote add origin git@github.com:disciplego/testdomain.git
+````
 #### Edit composer.json
   - [ ] app name and description
   - [ ] change "minimum-stability": "dev",
@@ -23,10 +32,14 @@
 ```
 #### Cornerstone
 - [ ] Install Cornerstone Package
+````
+composer require disciplego/cornerstone
+````
 - [ ] php artisan vendor:publish --force
 - [ ] php artisan tall:install
 - [ ] Copy .env.example options to .env
-- [ ] Create Database
+- [ ] create testdomain database (if using mysql)
+- [ ] php artisan migrate
 - [ ] NPM Install & Run Build
 #### Base
 - [ ] Install Base Package & Assets (Seeders)
@@ -44,7 +57,6 @@
 - [ ] php artisan shield:install
 #### TALL Stack
 - [ ] php artisan vendor:publish --force
-
 - [ ] php artisan style:colors
 - [ ] Extend Views and LiveWire Components with BaseComponents
 - [ ] NPM Install & Run Build

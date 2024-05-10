@@ -92,6 +92,7 @@ class CornerstoneServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cornerstone.php', 'cornerstone');
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-pages.php', 'dgo-pages');
+        $this->mergeConfigFrom(__DIR__ . '/../config/sushi-chef.php', 'sushi-chef');
         $this->mergeConfigFrom(__DIR__ . '/../config/google-fonts.php', 'google-fonts');
         $this->mergeConfigFrom(__DIR__ . '/../config/blade-ui-kit.php', 'blade-ui-kit');
 

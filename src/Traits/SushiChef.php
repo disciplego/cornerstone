@@ -11,11 +11,14 @@ use Sushi\Sushi;
 
 trait SushiChef
 {
-    use Sushi;
-
-
+    
     // Route key name
     protected string $routeKeyName = 'slug';
+
+    protected function afterMigrateChef(Blueprint $table): void
+    {
+        $table->index($this->routeKeyName);
+    }
 
     public function setRouteKeyName($name): void
     {
@@ -30,7 +33,7 @@ trait SushiChef
     // Should Cache
     protected ?bool $shouldCache = null;
 
-    protected function sushiShouldCache()
+    protected function sushiShouldCacheChef()
     {
         return $this->shouldCache;
     }
@@ -42,7 +45,7 @@ trait SushiChef
 
     public function getShouldCache()
     {
-        return $this->shouldCache;
+        return $this->shouldCache ?? config('sushi-chef.should_cache');
     }
 
     // Json File Path
@@ -102,34 +105,21 @@ trait SushiChef
         return $this->rowData;
     }
 
-    public function getRows($filePath = null)
+    public function getRowsChef()
     {
 
-        // First, check if data has been set manually (useful for testing).
-        if (!empty($this->rowData)) {
-            return $this->rowData;
-        }
-
-        if (empty($filePath)) {
-            $filePath = $this->filePath;
-        }
-        if (file_exists($filePath)) {
+        if (file_exists($this->filePath)) {
 
 
             // Load data from the JSON file.
-            $jsonData = $this->getJsonData($filePath);
+            $jsonData = $this->getJsonData($this->filePath);
             // Fetch data from the database.
             $databaseData = $this->fetchFromDatabase();
 
             // Assuming both sets of data are arrays of arrays, and 'slug' is the unique key
             return $this->mergeData($jsonData, $databaseData);
         }
-        return [];
-    }
-
-    protected function afterMigrate(Blueprint $table)
-    {
-        $table->index('slug');
+        return $this->getRowData();
     }
 
 
@@ -152,7 +142,7 @@ trait SushiChef
     }
 
 
-    public static function fetchFromDatabase()
+    public function fetchFromDatabase(): array
     {
         if (!Schema::hasTable('blogs')) {
             return [];  // Return an empty array if the table does not exist
@@ -160,7 +150,7 @@ trait SushiChef
         return Blog::all()->toArray();  // Convert Eloquent Collection to array
     }
 
-    public static function mergeData(array $jsonData, array $databaseData)
+    public function mergeData(array $jsonData, array $databaseData): array
     {
         // Index both datasets by 'slug'
         $jsonIndexed = collect($jsonData)->keyBy('slug')->toArray();
