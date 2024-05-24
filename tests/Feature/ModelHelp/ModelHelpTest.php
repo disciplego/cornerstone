@@ -1,7 +1,7 @@
 <?php
 
+use Dgo\Cornerstone\Facades\ModelHelp;
 use Illuminate\Filesystem\Filesystem;
-use \Dgo\Cornerstone\Facades\ModelHelp;
 
 trait DummyTrait
 {
@@ -42,7 +42,7 @@ it('gets all models with a specific trait from a given path', function () {
             'App/Models/Post.php',
         ]);
 
-    $modelHelp = Mockery::mock(Dgo\Cornerstone\ModelHelp::class, [$mock])
+    $modelHelp = Mockery::mock(\Dgo\Cornerstone\Helpers\ModelHelp::class, [$mock])
         ->makePartial()
         ->shouldAllowMockingProtectedMethods();
 

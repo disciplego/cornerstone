@@ -3,6 +3,7 @@
 namespace Dgo\Cornerstone\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Spatie\YamlFrontMatter\Document;
 
 /**
  * @method static Document getContentWithFrontMatter(string $markdown)

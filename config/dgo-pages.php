@@ -9,7 +9,7 @@ return [
         'hero' => [
             'icon' => 'fas-home',
             'show_icon' => true,
-            'pre_title' => 'We are passionate about helping you to:',
+            'pre_title' => 'We are passionate about helping you:',
             'description' => '~!Jesus!~ made it clear that disciples make disciples that make disciples. This site is all about providing you with resources and connections to become a disciple-maker!',
             'show_lead' => true,
             'abbreviation' => 'DGO',
@@ -20,13 +20,17 @@ return [
                 'reference' => 'Matthew 28:19-20',
                 'version' => 'net'
             ],
-            'buttons' => [[
-                'url' => null,
-                'type' => 'signup',
-                'label' => 'Subscribe',
-                'route' => 'newsletter.subscribe',
-            ]],
+            'buttons' => [
+                [
+                    'url' => null,
+                    'type' => 'signup',
+                    'label' => 'Subscribe',
+                    'route' => 'newsletter.subscribe',
+                ]
+            ],
 
         ],
+        'blocks' => [
+        ]
     ]
 ];

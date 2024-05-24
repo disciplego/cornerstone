@@ -40,3 +40,9 @@ it('overwrites existing favicon sizes and site manifest', function () {
     $newModTime = filemtime("{$tempDir}/favicon-16x16.png");
     expect($newModTime)->toBeGreaterThan($initialModTime);
 });
+
+it('throws an exception when an invalid URL is provided to generateFaviconSizes', function () {
+    $this->expectException(\Exception::class);
+
+    ImageHelp::generateFaviconSizes('invalid-url');
+});

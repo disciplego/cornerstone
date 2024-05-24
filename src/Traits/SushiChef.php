@@ -7,54 +7,56 @@ use Dgo\Cornerstone\Facades\SushiHelp;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Sushi\Sushi;
 
 trait SushiChef
 {
     
     // Route key name
-    protected string $routeKeyName = 'slug';
+protected static ?string $routeKeyName = 'slug';
 
     protected function afterMigrateChef(Blueprint $table): void
     {
-        $table->index($this->routeKeyName);
+        $table->index(self::$routeKeyName);
     }
 
-    public function setRouteKeyName($name): void
+    public static function setRouteKeyName($name = null): void
     {
-        $this->routeKeyName = $name;
+        if(!$name) {
+            self::$routeKeyName = config('sushi-chef.route_key_name', 'slug');
+        }
+        self::$routeKeyName = $name;
     }
 
     public function getRouteKeyName(): string
     {
-        return $this->routeKeyName;
+        return self::$routeKeyName;
     }
 
     // Should Cache
-    protected ?bool $shouldCache = null;
+    protected static ?bool $shouldCache = null;
 
     protected function sushiShouldCacheChef()
     {
         return $this->shouldCache;
     }
 
-    public function setShouldCache($cache): void
+    public static function setShouldCache($cache): void
     {
-        $this->shouldCache = $cache;
+        self::$shouldCache = $cache;
     }
 
-    public function getShouldCache()
+    public static function getShouldCache()
     {
-        return $this->shouldCache ?? config('sushi-chef.should_cache');
+        return self::$shouldCache ?? config('sushi-chef.should_cache');
     }
 
     // Json File Path
-    protected ?string $filePath = null;
+    protected static ?string $filePath = null;
 
-    public function getJsonData($path = null): array
+    public static function getJsonData($path = null): array
     {
         if (!$path) {
-            $path = $this->filePath;
+            $path = self::$filePath;
         }
 
         if (!file_exists($path)) {
@@ -62,17 +64,17 @@ trait SushiChef
         }
         $rows = json_decode(file_get_contents($path), true);
 
-        return $this->checkSlugs($rows);
+        return self::checkSlugs($rows);
     }
 
-    public function setFilePath($path): void
+    public static function setFilePath($path): void
     {
-        $this->filePath = $path;
+        self::$filePath = $path;
     }
 
-    public function getFilePath()
+    public static function getFilePath()
     {
-        return $this->filePath;
+        return self::$filePath;
     }
 
     public function resolveJsonFilePath($filePath = null, $userPath = null, $defaultPath = null)
@@ -93,37 +95,34 @@ trait SushiChef
     }
 
     // Rows
-    protected ?array $rowData = [];
+    protected static array $rows = [];
 
-    public function setRowData(?array $data): void
+    public static function setRows($rowData =[]): void
     {
-        $this->rowData = $data;
+        self::$rows = $rowData;
     }
 
-    public function getRowData()
-    {
-        return $this->rowData;
-    }
 
-    public function getRowsChef()
+
+    public static function getRowsChef()
     {
 
-        if (file_exists($this->filePath)) {
+        if (file_exists(self::$filePath)) {
 
 
             // Load data from the JSON file.
-            $jsonData = $this->getJsonData($this->filePath);
+            $jsonData = self::getJsonData(self::$filePath);
             // Fetch data from the database.
-            $databaseData = $this->fetchFromDatabase();
+            $databaseData = self::fetchFromDatabase();
 
             // Assuming both sets of data are arrays of arrays, and 'slug' is the unique key
-            return $this->mergeData($jsonData, $databaseData);
+            return self::mergeData($jsonData, $databaseData);
         }
-        return $this->getRowData();
+        return self::$rows;
     }
 
 
-    public function checkSlugs($rows): array
+    public static function checkSlugs($rows): array
     {
         $checkedRows = [];
         $slugs = []; // Initialize an array to track slugs
@@ -142,7 +141,7 @@ trait SushiChef
     }
 
 
-    public function fetchFromDatabase(): array
+    public static function fetchFromDatabase(): array
     {
         if (!Schema::hasTable('blogs')) {
             return [];  // Return an empty array if the table does not exist
@@ -150,7 +149,7 @@ trait SushiChef
         return Blog::all()->toArray();  // Convert Eloquent Collection to array
     }
 
-    public function mergeData(array $jsonData, array $databaseData): array
+    public static function mergeData(array $jsonData, array $databaseData): array
     {
         // Index both datasets by 'slug'
         $jsonIndexed = collect($jsonData)->keyBy('slug')->toArray();

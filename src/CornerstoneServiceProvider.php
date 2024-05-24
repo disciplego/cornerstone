@@ -5,8 +5,11 @@ namespace Dgo\Cornerstone;
 use Dgo\Cornerstone\Console\Commands\GenerateFaviconSizesCommand;
 use Dgo\Cornerstone\Console\Commands\ReadMeUpdate;
 use Dgo\Cornerstone\Console\Commands\TallStackInstall;
-use Dgo\Cornerstone\ImageHelp;
-use Dgo\Cornerstone\MarkdownHelp;
+use Dgo\Cornerstone\Helpers\ImageHelp;
+use Dgo\Cornerstone\Helpers\MarkdownHelp;
+use Dgo\Cornerstone\Helpers\ModelHelp;
+use Dgo\Cornerstone\Helpers\SushiHelp;
+use Dgo\Cornerstone\Managers\PageManager;
 use Dgo\Cornerstone\View\Components\Layouts\App;
 use Dgo\Cornerstone\View\Components\Layouts\Base;
 use Illuminate\Filesystem\Filesystem;
@@ -14,7 +17,6 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Folio\Folio;
-use Livewire\Volt\Volt;
 
 class CornerstoneServiceProvider extends ServiceProvider
 {
@@ -82,6 +84,12 @@ class CornerstoneServiceProvider extends ServiceProvider
             return "<?php echo MarkdownHelp::convertTitle($markdown); ?>";
         });
 
+        // Managers
+
+        if (!class_exists('PageManager')) {
+            class_alias(\Dgo\Cornerstone\Facades\PageManager::class, 'PageManager');
+        }
+
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -111,6 +119,10 @@ class CornerstoneServiceProvider extends ServiceProvider
 
         $this->app->singleton('sushi-help', function ($app) {
             return new SushiHelp;
+        });
+
+        $this->app->singleton('page-manager', function ($app) {
+            return new PageManager;
         });
     }
 
