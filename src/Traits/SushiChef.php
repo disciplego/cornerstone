@@ -146,7 +146,7 @@ protected static ?string $routeKeyName = 'slug';
         if (!Schema::hasTable('blogs')) {
             return [];  // Return an empty array if the table does not exist
         }
-        return Blog::all()->toArray();  // Convert Eloquent Collection to array
+        return self::all()->toArray();  // Convert Eloquent Collection to array
     }
 
     public static function mergeData(array $jsonData, array $databaseData): array
