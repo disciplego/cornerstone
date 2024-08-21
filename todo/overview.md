@@ -2,6 +2,7 @@
 
 ### Dgo Setup
 - [x] Install Laravel
+- [ ] Breeze with Class Based Components
 ````
 laravel new testdomain
 ````
@@ -14,6 +15,7 @@ git remote add origin git@github.com:disciplego/testdomain.git
 ````
 #### Edit composer.json
   - [ ] app name and description
+  - [ ] APP_TIMEZONE='America/Chicago'
   - [ ] change "minimum-stability": "dev",
   - [ ] add Dgo repository (for local packages first)
 ```

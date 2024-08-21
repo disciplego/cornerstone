@@ -141,9 +141,9 @@ protected static ?string $routeKeyName = 'slug';
     }
 
 
-    public static function fetchFromDatabase(): array
+    public static function fetchFromDatabase($tableName = 'blogs'): array
     {
-        if (!Schema::hasTable('blogs')) {
+        if (!Schema::hasTable($tableName)) {
             return [];  // Return an empty array if the table does not exist
         }
         return self::all()->toArray();  // Convert Eloquent Collection to array
