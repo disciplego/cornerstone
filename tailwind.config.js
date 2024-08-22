@@ -22,7 +22,9 @@ export default {
         './vendor/filament/**/*.blade.php',
         "./vendor/awcodes/curator/resources/views/**/*.blade.php",
         './storage/framework/views/*.php',
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
+        './resources/vendor/disciplego/resources/**/*.blade.php',
+        './resources/vendor/disciplego/resources/**/*.{php,js,vue}'
     ],
 
     theme: {
