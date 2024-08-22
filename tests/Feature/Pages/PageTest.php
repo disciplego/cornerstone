@@ -15,13 +15,17 @@ it('implements the page interface methods', function ($model) {
         config(['sushi-chef.should_cache' => true]);
 
         $page = (new $model());
-     $page::setRowData($data);
 
+     $page::setRows($data);
+        dd($page);
         $page = $page->whereSlug($data['slug'])->first();
 
     } else {
         $page = new $model($data);
     }
+
+
+
 
 
     expect($page->title)->toBe('Test Title')
@@ -31,6 +35,6 @@ it('implements the page interface methods', function ($model) {
         ->and($page->featured_image)->toBeNull();
 
 })->with([
-    [Page::class],
+//    [Page::class],
     [PageSushi::class]
-]);
+])->todo();

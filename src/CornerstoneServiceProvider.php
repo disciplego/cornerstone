@@ -102,6 +102,7 @@ class CornerstoneServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cornerstone.php', 'cornerstone');
+        $this->mergeConfigFrom(__DIR__ . '/../config/dgo-image-help.php', 'dgo-image-help');
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-pages.php', 'dgo-pages');
         $this->mergeConfigFrom(__DIR__ . '/../config/sushi-chef.php', 'sushi-chef');
         $this->mergeConfigFrom(__DIR__ . '/../config/google-fonts.php', 'google-fonts');
@@ -144,6 +145,7 @@ class CornerstoneServiceProvider extends ServiceProvider
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/../config/cornerstone.php' => config_path('cornerstone.php'),
+            __DIR__ . '/../config/dgo-image-help.php' => config_path('dgo-image-help.php'),
             __DIR__ . '/../config/dgo-pages.php' => config_path('dgo-pages.php'),
             __DIR__ . '/../config/google-fonts.php' => config_path('google-fonts.php'),
             //            __DIR__.'/../config/seo.php' => config_path('seo.php'),
@@ -159,6 +161,11 @@ class CornerstoneServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/pages' => base_path('resources/views/pages'),
         ], 'cornerstone.folio');
+
+        // Publishing the source images.
+        $this->publishes([
+            __DIR__ . '/../resources/images' => base_path('resources/images'),
+        ], 'cornerstone.images');
 
         // Publishing the TALL Stack frontend base config.js files.
         $this->publishes([

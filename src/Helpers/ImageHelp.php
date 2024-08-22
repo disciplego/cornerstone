@@ -37,7 +37,11 @@ class ImageHelp
         $savePath = $savePath ?? public_path();
 
         if (! $primaryFaviconUrl) {
-            $primaryFaviconUrl = 'https://dummyimage.com/512.png';
+            if(self::isValidImageUrl(config('dgo-image-help.favicon_url'))){
+                $primaryFaviconUrl = config('dgo-image-help.favicon_url');
+            } else {
+                $primaryFaviconUrl = self::getDummyImageUrl();
+            }
         }
         $originalImage = file_get_contents($primaryFaviconUrl);
         $faviconSizes = [
@@ -88,5 +92,19 @@ class ImageHelp
 
         $manifestJson = json_encode($manifest, JSON_PRETTY_PRINT);
         file_put_contents("{$savePath}/site.webmanifest", $manifestJson);
+    }
+
+    public static function isValidImageUrl($url): bool
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+
+        $path = parse_url($url, PHP_URL_PATH);
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+        $validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'];
+
+        return in_array(strtolower($extension), $validExtensions);
     }
 }
