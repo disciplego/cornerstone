@@ -39,6 +39,7 @@ class ImageHelp
         if (! $primaryFaviconUrl) {
             if(self::isValidImageUrl(config('dgo-image-help.favicon_url'))){
                 $primaryFaviconUrl = config('dgo-image-help.favicon_url');
+
             } else {
                 $primaryFaviconUrl = self::getDummyImageUrl();
             }
@@ -94,14 +95,22 @@ class ImageHelp
         file_put_contents("{$savePath}/site.webmanifest", $manifestJson);
     }
 
-    public static function isValidImageUrl($url): bool
+    public static function isValidImageUrl($path): bool
     {
-        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            return false;
-        }
+        // Check if the input is a URL
+        if (filter_var($path, FILTER_VALIDATE_URL) !== false) {
+            // Validate the URL extension
+            $urlPath = parse_url($path, PHP_URL_PATH);
+            $extension = pathinfo($urlPath, PATHINFO_EXTENSION);
+        } else {
+            // Handle local file paths
+            $extension = pathinfo($path, PATHINFO_EXTENSION);
 
-        $path = parse_url($url, PHP_URL_PATH);
-        $extension = pathinfo($path, PATHINFO_EXTENSION);
+            // Ensure the file exists
+            if (!file_exists($path)) {
+                return false;
+            }
+        }
 
         $validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'];
 
