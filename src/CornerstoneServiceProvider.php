@@ -31,14 +31,15 @@ class CornerstoneServiceProvider extends ServiceProvider
             Base::class,
             App::class,
         ]);
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Set default view data
         View::share([
             'trackingId' => config('cornerstone.google_analytics_id'),
             'title' => null,
-            'mainMenuItems' => config('cornerstone.main_menu_items'),
-            'footerMenuItems' => config('cornerstone.footer_menu_items'),
-            'socialMenuItems' => config('cornerstone.social_menu_items'),
+            'mainMenuItems' => config('dgo-menus.main_menu_items'),
+            'footerMenuItems' => config('dgo-menus.footer_menu_items'),
+            'socialMenuItems' => config('dgo-menus.social_menu_items'),
             'hideMainMenu' => false,
         ]);
 
@@ -103,6 +104,7 @@ class CornerstoneServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cornerstone.php', 'cornerstone');
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-image-help.php', 'dgo-image-help');
+        $this->mergeConfigFrom(__DIR__ . '/../config/dgo-menus.php', 'dgo-menus');
         $this->mergeConfigFrom(__DIR__ . '/../config/dgo-pages.php', 'dgo-pages');
         $this->mergeConfigFrom(__DIR__ . '/../config/sushi-chef.php', 'sushi-chef');
         $this->mergeConfigFrom(__DIR__ . '/../config/google-fonts.php', 'google-fonts');
@@ -142,10 +144,16 @@ class CornerstoneServiceProvider extends ServiceProvider
      */
     protected function bootForConsole(): void
     {
+        // Publishing the migrations.
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'cornerstone.migrations');
+
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/../config/cornerstone.php' => config_path('cornerstone.php'),
             __DIR__ . '/../config/dgo-image-help.php' => config_path('dgo-image-help.php'),
+            __DIR__ . '/../config/dgo-menus.php' => config_path('dgo-menus.php'),
             __DIR__ . '/../config/dgo-pages.php' => config_path('dgo-pages.php'),
             __DIR__ . '/../config/google-fonts.php' => config_path('google-fonts.php'),
             //            __DIR__.'/../config/seo.php' => config_path('seo.php'),
