@@ -41,6 +41,6 @@ class Menu extends Model
      */
     public function items(): BelongsToMany
     {
-        return $this->belongsToMany(MenuItem::class, 'menu_menu_item');
+        return $this->belongsToMany(MenuItem::class);
     }
 }

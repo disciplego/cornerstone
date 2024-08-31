@@ -58,6 +58,6 @@ class MenuItem extends Model implements Sortable
      */
     public function menus(): BelongsToMany
     {
-        return $this->belongsToMany(Menu::class, 'menu_menu_item');
+        return $this->belongsToMany(Menu::class);
     }
 }
